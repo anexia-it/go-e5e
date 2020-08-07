@@ -1,0 +1,23 @@
+language: go
+
+matrix:
+  include:
+    - go: "1.14"
+
+branches:
+  only:
+    - master
+
+before_install:
+  - go get golang.org/x/tools/cmd/cover
+  - go get golang.org/x/tools/cmd/goimports
+
+script:
+ - go get -t -v ./...
+ - diff -u <(echo -n) <(gofmt -d .)
+ - diff -u <(echo -n) <(goimports -d .)
+ - go vet .
+ - go test -v -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
