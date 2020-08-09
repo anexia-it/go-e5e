@@ -1,7 +1,7 @@
 go-e5e
 ======
 
-[![PkgGoDev](https://pkg.go.dev/badge/anexia-it/go-e5e)](https://pkg.go.dev/anexia-it/go-e5e)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/anexia-it/go-e5e)](https://pkg.go.dev/github.com/anexia-it/go-e5e)
 [![Build Status](https://travis-ci.org/anexia-it/go-e5e.svg?branch=master)](https://travis-ci.org/anexia-it/go-e5e)
 [![codecov](https://codecov.io/gh/anexia-it/go-e5e/branch/master/graph/badge.svg)](https://codecov.io/gh/anexia-it/go-e5e)
 [![Go Report Card](https://goreportcard.com/badge/github.com/anexia-it/go-e5e)](https://goreportcard.com/report/github.com/anexia-it/go-e5e)
@@ -24,7 +24,7 @@ package main
 import (
 	"runtime"
 
-	e5e "github.com/anexia-it/go-e5e"
+	"github.com/anexia-it/go-e5e"
 )
 
 type entrypoints struct{}
