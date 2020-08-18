@@ -45,6 +45,11 @@ var (
 	fmtFprint = fmt.Fprint
 )
 
+// Export a constant that indicates the implemented custom binary interface version.
+const (
+	CustomBinaryInterfaceVersion = 1
+)
+
 // This function takes the struct containing the available entrypoint methods and handles the invocation of the
 // entrypoint as well as the communication with the e5e platform itself. Does not return if everything went well but
 // does return an error if there are errors in the invocation or the entrypoint signature.
