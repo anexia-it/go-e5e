@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 	"reflect"
 )
@@ -47,7 +48,7 @@ var (
 
 // Export a constant that indicates the implemented custom binary interface version.
 const (
-	CustomBinaryInterfaceVersion = 1
+	CustomBinaryInterfaceVersion = 2
 )
 
 // This function takes the struct containing the available entrypoint methods and handles the invocation of the
@@ -88,12 +89,22 @@ func Start(entrypoints interface{}) error {
 	contextType := entrypoint.Type().In(1)
 	event := reflect.New(eventType).Interface()
 	context := reflect.New(contextType).Interface()
+	eventInput, eventInputErr := ioutil.ReadFile(os.Args[2])
+	contextInput, contextInputErr := ioutil.ReadFile(os.Args[3])
+
+	// Check if we could read the object input files successfully.
+	if eventInputErr != nil {
+		return fmt.Errorf("cannot read event object file '%s'", os.Args[2])
+	}
+	if contextInputErr != nil {
+		return fmt.Errorf("cannot read context object file '%s'", os.Args[3])
+	}
 
 	// Next we try to load the JSON data of the event and context arguments into the previousely created instances.
-	if err := json.Unmarshal([]byte(os.Args[2]), event); err != nil {
+	if err := json.Unmarshal(eventInput, event); err != nil {
 		return fmt.Errorf("cannot apply event object to '%s' type", eventType.Name())
 	}
-	if err := json.Unmarshal([]byte(os.Args[3]), context); err != nil {
+	if err := json.Unmarshal(contextInput, context); err != nil {
 		return fmt.Errorf("cannot apply context object to '%s' type", contextType.Name())
 	}
 
