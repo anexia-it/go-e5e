@@ -1,3 +1,7 @@
+# DEPRECATED
+This version of the library is designed for the old `custom` e5e runtime. The new version for the `binary` runtime is
+published in the repository: https://github.com/anexia/go-e5e/
+
 go-e5e
 ======
 
